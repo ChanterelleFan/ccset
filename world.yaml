@@ -1,0 +1,295 @@
+my_setting:
+- &time_test 21600             # 测试节点延迟的间隔（秒）（自动切换节点的检测间隔）
+- &time_update 18000        # 节点订阅更新的间隔（秒）（24h更新一次）
+- &time_update_rule 18000  # 分流规则更新的间隔（秒）（7天更新一次）
+- &test_url "http://www.apple.com/generate_204"  # 延迟测试链接 http://www.gstatic.com/generate_204 或 https://cp.cloudflare.com
+###############################################################################
+
+#################### 端口 | 模式 | 外部控制端口 ############################
+mixed-port: 7891  # http代理 + socks代理
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090  # 网页版控制：[clash.razord.top] 或 [yacd.haishan.me] 默认密码为空
+
+#################### DNS | tap | 绕过fake-ip的域名 ############################
+dns:
+  enable: true
+  ipv6: false
+  #listen: 0.0.0.0:53       # 开启tap：0.0.0.0:53 关闭tap：127.0.0.1:53
+  enhanced-mode: fake-ip    # fake-ip 或 redir-host
+  nameserver:
+  - 119.29.29.29            # 腾讯 DNS
+  - 223.6.6.6               # 阿里 DNS
+  - 114.114.114.114
+  - tls://dns.rubyfish.cn:853
+  - https://dns.adguard.com/dns-query
+  fallback:
+  - 8.8.4.4
+  - 1.0.0.1
+  - tls://dns.rubyfish.cn:853
+  - tls://1.0.0.1:853
+  - tls://dns.google:853
+  - https://1.1.1.1/dns-query
+  use-hosts: true
+  fake-ip-filter:
+  - '*.lan'
+  - 'localhost.ptlogin2.qq.com'
+  - '+.xboxlive.com'
+  - '+.stun.playstation.net'
+  - '+.srv.nintendo.net'
+  - 'xbox.*.microsoft.com'
+  - 'dns.msftncsi.com'  # 微软商店
+  - 'www.msftncsi.com'
+  - 'www.msftconnecttest.com'  # Windows测试网络是否通畅
+  - stun.*.*.*
+  - stun.*.*
+  - music.163.com
+  - "*.music.163.com"
+  - "*.126.net"
+  - musicapi.taihe.com
+  - music.taihe.com
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - "*.kuwo.cn"
+  - api-jooxtt.sanook.com
+  - api.joox.com
+  - joox.com
+  - y.qq.com
+  - "*.y.qq.com"
+  - streamoc.music.tc.qq.com
+  - mobileoc.music.tc.qq.com
+  - isure.stream.qqmusic.qq.com
+  - dl.stream.qqmusic.qq.com
+  - aqqmusic.tc.qq.com
+  - amobile.music.tc.qq.com
+  - "*.xiami.com"
+  - "*.music.migu.cn"
+  - music.migu.cn
+  - "*.msftconnecttest.com"
+  - "*.msftncsi.com"
+  - localhost.ptlogin2.qq.com
+  - "*.*.*.srv.nintendo.net"
+  - "*.*.stun.playstation.net"
+  - xbox.*.*.microsoft.com
+  - "*.ipv6.microsoft.com"
+  - "*.*.xboxlive.com"
+  - speedtest.cros.wr.pvp.net
+  fallback-filter:
+    domain:
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
+      - '+.instagram.com'
+      - '+.twitter.com'
+      - '+.bbc.com'
+      - '+.wikipedia.org'
+      - '+.twitch.tv'
+      - '+.pornhub.com'
+      - '+.amazon.com'
+##################### 机场订阅 （可添加若干不同的机场）#######################
+####################### 若某些机场未提供 node list ############################
+################ 使用转换器 https://sub.dler.io 转换为 node list ##############
+proxy-providers:
+  DlerCloud:
+    type: http
+    path: ./nodes/DlerCloud.list
+    url:
+    interval: *time_update  # 订阅更新间隔（秒）
+    health-check:
+      enable: false
+      url: *test_url
+      interval: *time_test  # 测试间隔
+  Nexitally:
+    type: http
+    path: ./nodes/Nexitally.list
+    url:
+    interval: *time_update
+    health-check:
+      enable: false
+      url: *test_url
+      interval: *time_test
+  Other-nodes:
+    type: http
+    path: ./nodes/Other-nodes.list
+    url: 
+    interval: *time_update
+    health-check:
+      enable: false
+      url: *test_url
+      interval: *time_test
+  Game:
+    type: http
+    path: ./nodes/Game.list
+    url:
+    interval: *time_update
+    health-check:
+      enable: false
+      url: *test_url
+      interval: *time_test
+################################### 策略组 #################################### 
+proxy-groups:
+- name: PROXY
+  type: select
+  proxies:
+  - 🛸 Nexitally
+  - 🚑 DlerCloud
+  - 🛴 Other-nodes
+  - 🕹️ Game
+  - 🐾 Relay
+- name: "GlobalTV"
+  type: select
+  proxies:
+  - PROXY
+  - 🐾 Relay
+  - 🛸 Nexitally
+  - 🚑 DlerCloud
+  - 🛴 Other-nodes
+- name: "AsianTV"
+  type: select
+  proxies:
+  - DIRECT
+  - PROXY
+  - 🐾 Relay
+  - 🛸 Nexitally
+  - 🚑 DlerCloud
+  - 🛴 Other-nodes
+- name: "🛸 Nexitally"
+  type: select
+  use:
+  - Nexitally
+- name: "🚑 DlerCloud"
+  type: select
+  use:
+  - DlerCloud
+- name: "🛴 Other-nodes"
+  type: select
+  use:
+  - Other-nodes
+- name: "🕹️ Game"
+  type: select
+  disable-udp: false
+  use:
+  - Game
+- name: "🐾 Relay"
+  type: relay
+  proxies:
+  - 🐾 Relay start
+  - 🐾 Relay end
+- name: "🐾 Relay start"
+  type: select
+  use:
+  - Nexitally
+  - DlerCloud
+- name: "🐾 Relay end"
+  type: select
+  use:
+  - Other-nodes
+- name: "Final"  # 没有匹配到任何规则时，该走向何处？
+  type: select
+  proxies:
+  - PROXY
+  - DIRECT
+- name: 🍌 Speedtest # 所有策略组概览 (speedtest和 IP查询网站)
+  type: select
+  proxies:
+  - PROXY            # 真正的代理节点（默认代理会走的节点）
+  - DIRECT           # 直连（看看本地网络是否通畅）
+  - 🐾 Relay         # 中继（中继不支持UDP）
+  - 🐾 Relay start   # 中继起点（延迟最低或速度最快）
+  - 🐾 Relay end     # 中继终点（你想去的地方）
+  - 🛸 Nexitally          # AIA + IEPL节点
+  - 🚑 DlerCloud           # BGP节点
+  - 🛴 Other-nodes   # 其他节点
+  - 🕹️ Game          # 游戏节点
+  - GlobalTV         # 国外流媒体（Netflix+YouTube+Hulu+HBO+BBC+Fox+Disney+Apple TV+AbemaTV+TikTok+Twitch+Pornhub+Spotify+YouTubeMusic等）
+  - AsianTV          # 亚洲流媒体（爱奇艺+Bilibili+芒果TV+WeTV]） 
+rule-providers:
+  apple-proxy:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/Basic/Apple-proxy.yaml"
+    path: ./ruleset/Apple-proxy.yaml
+    interval: 3600
+  apple-direct:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/Basic/Apple-direct.yaml"
+    path: ./ruleset/Apple-direct.yaml
+    interval: 3600
+  DisneyPlus:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/App/stream/DisneyPlus.yaml"
+    path: ./ruleset/DisneyPlus.yaml
+    interval: 3600
+  Netflix:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/App/stream/Netflix.yaml"
+    path: ./ruleset/Netflix.yaml
+    interval: 3600	
+  cn:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/Basic/CN.yaml"
+    path: ./ruleset/CN.yaml
+    interval: 3600
+  ad-keyword:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/Basic/common-ad-keyword.yaml"
+    path: ./ruleset/common-ad-keyword.yaml
+    interval: 3600
+  foreign:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/Basic/foreign.yaml"
+    path: ./ruleset/foreign.yaml
+    interval: 3600
+  telegram:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/App/social/Telegram.yaml"
+    path: ./ruleset/Telegram.yaml
+    interval: 3600
+  lan:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/Basic/LAN.yaml"
+    path: ./ruleset/LAN.yaml
+    interval: 3600
+############### rule模式 [从上至下匹配规则，越靠前优先级越高] ################
+################ 若需要添加自定义规则，直接在下方修改即可 ####################
+rules:
+# 测速网站 | 测IP网站
+- DOMAIN-KEYWORD,speedtest,🍌 Speedtest
+- DOMAIN-KEYWORD,ooklaserver,🍌 Speedtest
+- DOMAIN-SUFFIX,ipip.net,🍌 Speedtest
+- DOMAIN-SUFFIX,ipinfo.io,🍌 Speedtest
+- DOMAIN-SUFFIX,ip.sb,🍌 Speedtest
+- DOMAIN-SUFFIX,whoer.net,🍌 Speedtest
+- DOMAIN-SUFFIX,speed.cloudflare.com,🍌 Speedtest
+- DOMAIN-SUFFIX,fast.com,GlobalTV        # fast测速会走Netflix服务器
+# steam商店直连 | steam社区代理
+- DOMAIN-SUFFIX,steamstatic.com,PROXY
+- DOMAIN-SUFFIX,steamcommunity.com,PROXY
+############################ rule-set 远程规则 ################################
+- RULE-SET,apple-proxy,PROXY
+- RULE-SET,apple-direct,DIRECT
+- RULE-SET,DisneyPlus,PROXY
+- RULE-SET,Netflix,PROXY
+- RULE-SET,cn,DIRECT
+- RULE-SET,ad-keyword,REJECT
+- RULE-SET,foreign,PROXY
+- RULE-SET,telegram,PROXY
+- RULE-SET,lan,DIRECT
+- DOMAIN-SUFFIX,smtp,DIRECT
+- DOMAIN-SUFFIX,local,DIRECT
+- IP-CIDR,10.0.0.0/8,DIRECT
+- IP-CIDR,100.64.0.0/10,DIRECT
+- IP-CIDR,127.0.0.0/8,DIRECT
+- IP-CIDR,172.16.0.0/12,DIRECT
+- IP-CIDR,192.168.0.0/16,DIRECT
+- GEOIP,CN,DIRECT              # 使用geoip数据库匹配国内IP
+- MATCH,Final
