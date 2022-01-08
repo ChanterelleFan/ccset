@@ -141,6 +141,7 @@ proxy-groups:
   type: select
   proxies:
   - PROXY
+  - Media-Nodes
   - 🐾 Relay
   - 🛸 Nexitally
   - 🚑 DlerCloud
@@ -185,6 +186,11 @@ proxy-groups:
   type: select
   use:
   - Other-nodes
+- name: "Media-Nodes"
+  type: select
+  use:
+  - Nexitally
+  - DlerCloud
 - name: "Final"  # 没有匹配到任何规则时，该走向何处？
   type: select
   proxies:
