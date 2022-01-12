@@ -136,13 +136,11 @@ proxy-groups:
   - 🚑 DlerCloud
   - 🛴 Other-nodes
   - 🕹️ Game
-  - 🐾 Relay
 - name: "GlobalTV"
   type: select
   proxies:
   - PROXY
   - Media-Nodes
-  - 🐾 Relay
   - 🛸 Nexitally
   - 🚑 DlerCloud
   - 🛴 Other-nodes
@@ -151,7 +149,6 @@ proxy-groups:
   proxies:
   - DIRECT
   - PROXY
-  - 🐾 Relay
   - 🛸 Nexitally
   - 🚑 DlerCloud
   - 🛴 Other-nodes
@@ -172,20 +169,6 @@ proxy-groups:
   disable-udp: false
   use:
   - Game
-- name: "🐾 Relay"
-  type: relay
-  proxies:
-  - 🐾 Relay start
-  - 🐾 Relay end
-- name: "🐾 Relay start"
-  type: select
-  use:
-  - Nexitally
-  - DlerCloud
-- name: "🐾 Relay end"
-  type: select
-  use:
-  - Other-nodes
 - name: "Media-Nodes"
   type: select
   use:
@@ -201,9 +184,6 @@ proxy-groups:
   proxies:
   - PROXY            # 真正的代理节点（默认代理会走的节点）
   - DIRECT           # 直连（看看本地网络是否通畅）
-  - 🐾 Relay         # 中继（中继不支持UDP）
-  - 🐾 Relay start   # 中继起点（延迟最低或速度最快）
-  - 🐾 Relay end     # 中继终点（你想去的地方）
   - 🛸 Nexitally          # AIA + IEPL节点
   - 🚑 DlerCloud           # BGP节点
   - 🛴 Other-nodes   # 其他节点
