@@ -251,7 +251,6 @@ rules:
 # 测速网站 | 测IP网站
 - DOMAIN-KEYWORD,speedtest,🍌 Speedtest
 - DOMAIN-KEYWORD,ooklaserver,🍌 Speedtest
-- DOMAIN-SUFFIX,ipip.net,🍌 Speedtest
 - DOMAIN-SUFFIX,ipinfo.io,🍌 Speedtest
 - DOMAIN-SUFFIX,ip.sb,🍌 Speedtest
 - DOMAIN-SUFFIX,whoer.net,🍌 Speedtest
