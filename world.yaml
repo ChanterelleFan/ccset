@@ -33,9 +33,9 @@ dns:
   fake-ip-filter:
   - '*.lan'
   - 'localhost.ptlogin2.qq.com'
-  - '+.xboxlive.com'
-  - '+.stun.playstation.net'
-  - '+.srv.nintendo.net'
+  - '*.xboxlive.com'
+  - '*.stun.playstation.net'
+  - '*.srv.nintendo.net'
   - 'xbox.*.microsoft.com'
   - 'dns.msftncsi.com'  # 微软商店
   - 'www.msftncsi.com'
