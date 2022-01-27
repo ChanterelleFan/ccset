@@ -274,7 +274,7 @@ rule-providers:
   Steam:
     type: http
     behavior: classical
-    url: "https://raw.lhie1.com/lhie1/Rules/master/Clash/Provider/Steam.yaml"
+    url: "https://raw.dler.io/main/Clash/Provider/Steam.yaml"
     path: ./ruleset/Steam.yaml
     interval: 86400
   cn:
