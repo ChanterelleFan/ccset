@@ -283,12 +283,6 @@ rule-providers:
     url: "https://raw.dler.io/main/Clash/Provider/Domestic.yaml"
     path: ./ruleset/CN.yaml
     interval: 3600
-  cnip:
-    type: http
-    behavior: classical
-    url: "https://raw.dler.io/main/Clash/Provider/Domestic%20IPs.yaml"
-    path: ./ruleset/CNip.yaml
-    interval: 3600
   ad-keyword:
     type: http
     behavior: classical
@@ -338,7 +332,6 @@ rules:
 - RULE-SET,Netflix,Media-Nodes
 - RULE-SET,Steam,PROXY
 - RULE-SET,cn,DIRECT
-- RULE-SET,cnip,DIRECT
 - RULE-SET,ad-keyword,REJECT
 - RULE-SET,foreign,PROXY
 - RULE-SET,telegram,PROXY
