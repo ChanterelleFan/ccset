@@ -147,7 +147,7 @@ tun:
     - 198.18.0.2:53
 ################ 使用转换器 https://sub.dler.io 转换为 node list ##############
 proxy-providers:
-  DlerCloud:
+  DlerCloud-nodes:
     type: http
     path: ./nodes/DlerCloud.list
     url:
@@ -156,7 +156,7 @@ proxy-providers:
       enable: false
       url: *test_url
       interval: *time_test  # 测试间隔
-  Nexitally:
+  Nexitally-nodes:
     type: http
     path: ./nodes/Nexitally.list
     url:
@@ -174,7 +174,7 @@ proxy-providers:
       enable: false
       url: *test_url
       interval: *time_test
-  Game:
+  Game-nodes:
     type: http
     path: ./nodes/Game.list
     url:
@@ -188,49 +188,50 @@ proxy-groups:
 - name: PROXY
   type: select
   proxies:
-  - 🛸 Nexitally
-  - 🚑 DlerCloud
-  - 🛴 Other-nodes
-  - 🕹️ Game
+  - Nexitally
+  - DlerCloud
+  - Other-nodes
+  - Game
 - name: GlobalTV
   type: select
   proxies:
   - PROXY
   - Media-Nodes
-  - 🛸 Nexitally
-  - 🚑 DlerCloud
-  - 🛴 Other-nodes
+  - Nexitally
+  - DlerCloud
+  - Other-node
 - name: AsianTV
   type: select
   proxies:
   - DIRECT
   - PROXY
-  - 🛸 Nexitally
-  - 🚑 DlerCloud
-  - 🛴 Other-nodes
-- name: 🛸 Nexitally
-  type: select
-  use:
   - Nexitally
-- name: 🚑 DlerCloud
+  - DlerCloud
+  - Other-node
+- name: Nexitally
   type: select
   use:
-  - DlerCloud
-- name: 🛴 Other-nodes
+  - Nexitally-nodes
+- name: DlerCloud
+  type: select
+  use:
+  - DlerCloud-nodes
+- name: Other-node
   type: select
   use:
   - Other-nodes
-- name: 🕹️ Game
+- name: Game
   type: select
   disable-udp: false
   use:
-  - Game
+  - Game-nodes
 - name: Media-Nodes
   type: select
   use:
+  - PROXY
   - Nexitally
   - DlerCloud
-- name: "Final"  # 没有匹配到任何规则时，该走向何处？
+- name: Final
   type: select
   proxies:
   - PROXY
