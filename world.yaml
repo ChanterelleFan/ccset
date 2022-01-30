@@ -241,12 +241,6 @@ proxy-groups:
   proxies:
   - PROXY            # 真正的代理节点（默认代理会走的节点）
   - DIRECT           # 直连（看看本地网络是否通畅）
-  - 🛸 Nexitally          # AIA + IEPL节点
-  - 🚑 DlerCloud           # BGP节点
-  - 🛴 Other-nodes   # 其他节点
-  - 🕹️ Game          # 游戏节点
-  - GlobalTV         # 国外流媒体（Netflix+YouTube+Hulu+HBO+BBC+Fox+Disney+Apple TV+AbemaTV+TikTok+Twitch+Pornhub+Spotify+YouTubeMusic等）
-  - AsianTV          # 亚洲流媒体（爱奇艺+Bilibili+芒果TV+WeTV]） 
 rule-providers:
   apple-proxy:
     type: http
