@@ -149,7 +149,7 @@ tun:
 proxy-providers:
   DlerCloud-nodes:
     type: http
-    path: ./nodes/DlerCloud.list
+    path: ./nodes/DlerCloud-nodes.list
     url:
     interval: *time_update  # 订阅更新间隔（秒）
     health-check:
@@ -158,7 +158,7 @@ proxy-providers:
       interval: *time_test  # 测试间隔
   Nexitally-nodes:
     type: http
-    path: ./nodes/Nexitally.list
+    path: ./nodes/Nexitally-nodes.list
     url:
     interval: *time_update
     health-check:
@@ -176,7 +176,7 @@ proxy-providers:
       interval: *time_test
   Game-nodes:
     type: http
-    path: ./nodes/Game.list
+    path: ./nodes/Game-nodes.list
     url:
     interval: *time_update
     health-check:
@@ -196,7 +196,7 @@ proxy-groups:
   type: select
   proxies:
   - PROXY
-  - Media-Nodes
+  - Media-Node
   - Nexitally
   - DlerCloud
   - Other-node
@@ -225,10 +225,9 @@ proxy-groups:
   disable-udp: false
   use:
   - Game-nodes
-- name: Media-Nodes
+- name: Media-Node
   type: select
   use:
-  - PROXY
   - Nexitally
   - DlerCloud
 - name: Final
@@ -236,11 +235,11 @@ proxy-groups:
   proxies:
   - PROXY
   - DIRECT
-- name: 🍌 Speedtest # 所有策略组概览 (speedtest和 IP查询网站)
+- name: Speedtest 
   type: select
   proxies:
-  - PROXY            # 真正的代理节点（默认代理会走的节点）
-  - DIRECT           # 直连（看看本地网络是否通畅）
+  - PROXY
+  - DIRECT
 rule-providers:
   apple-proxy:
     type: http
@@ -306,12 +305,12 @@ rule-providers:
 ################ 若需要添加自定义规则，直接在下方修改即可 ####################
 rules:
 # 测速网站 | 测IP网站
-- DOMAIN-KEYWORD,speedtest,🍌 Speedtest
-- DOMAIN-KEYWORD,ooklaserver,🍌 Speedtest
-- DOMAIN-SUFFIX,ipinfo.io,🍌 Speedtest
-- DOMAIN-SUFFIX,ip.sb,🍌 Speedtest
-- DOMAIN-SUFFIX,whoer.net,🍌 Speedtest
-- DOMAIN-SUFFIX,speed.cloudflare.com,🍌 Speedtest
+- DOMAIN-KEYWORD,speedtest,Speedtest
+- DOMAIN-KEYWORD,ooklaserver,Speedtest
+- DOMAIN-SUFFIX,ipinfo.io,Speedtest
+- DOMAIN-SUFFIX,ip.sb,Speedtest
+- DOMAIN-SUFFIX,whoer.net,Speedtest
+- DOMAIN-SUFFIX,speed.cloudflare.com,Speedtest
 - DOMAIN-SUFFIX,fast.com,GlobalTV        # fast测速会走Netflix服务器
 - DOMAIN-SUFFIX,steamcontent.tnkjmec.com,DIRECT #华为云
 - DOMAIN-SUFFIX,eccdnx.com,DIRECT #白山云
@@ -323,8 +322,8 @@ rules:
 ############################ rule-set 远程规则 ################################
 - RULE-SET,apple-proxy,PROXY
 - RULE-SET,apple-direct,DIRECT
-- RULE-SET,DisneyPlus,Media-Nodes
-- RULE-SET,Netflix,Media-Nodes
+- RULE-SET,DisneyPlus,Media-Node
+- RULE-SET,Netflix,Media-Node
 - RULE-SET,Steam,PROXY
 - RULE-SET,cn,DIRECT
 - RULE-SET,ad-keyword,REJECT
