@@ -190,7 +190,7 @@ proxy-groups:
   proxies:
   - Nexitally
   - DlerCloud
-  - Other-nodes
+  - Other-node
   - Game
 - name: GlobalTV
   type: select
