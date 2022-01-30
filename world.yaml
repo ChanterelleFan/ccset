@@ -147,36 +147,36 @@ tun:
     - 198.18.0.2:53
 ################ 使用转换器 https://sub.dler.io 转换为 node list ##############
 proxy-providers:
-  DlerCloud-nodes:
+  DlerCloudnodes:
     type: http
-    path: ./nodes/DlerCloud-nodes.list
+    path: ./nodes/DlerCloudnodes.list
     url:
     interval: *time_update  # 订阅更新间隔（秒）
     health-check:
       enable: false
       url: *test_url
       interval: *time_test  # 测试间隔
-  Nexitally-nodes:
+  Nexitallynodes:
     type: http
-    path: ./nodes/Nexitally-nodes.list
+    path: ./nodes/Nexitallynodes.list
     url:
     interval: *time_update
     health-check:
       enable: false
       url: *test_url
       interval: *time_test
-  Other-nodes:
+  Othernodes:
     type: http
-    path: ./nodes/Other-nodes.list
-    url: 
+    path: ./nodes/Othernodes.list
+    url:
     interval: *time_update
     health-check:
       enable: false
       url: *test_url
       interval: *time_test
-  Game-nodes:
+  Gamenodes:
     type: http
-    path: ./nodes/Game-nodes.list
+    path: ./nodes/Gamenodes.list
     url:
     interval: *time_update
     health-check:
@@ -190,16 +190,16 @@ proxy-groups:
   proxies:
   - Nexitally
   - DlerCloud
-  - Other-node
+  - Othernode
   - Game
 - name: GlobalTV
   type: select
   proxies:
   - PROXY
-  - Media-Node
+  - MediaNode
   - Nexitally
   - DlerCloud
-  - Other-node
+  - Othernode
 - name: AsianTV
   type: select
   proxies:
@@ -207,25 +207,25 @@ proxy-groups:
   - PROXY
   - Nexitally
   - DlerCloud
-  - Other-node
+  - Othernode
 - name: Nexitally
   type: select
   use:
-  - Nexitally-nodes
+  - Nexitallynodes
 - name: DlerCloud
   type: select
   use:
-  - DlerCloud-nodes
-- name: Other-node
+  - DlerCloudnodes
+- name: Othernode
   type: select
   use:
-  - Other-nodes
+  - Othernodes
 - name: Game
   type: select
   disable-udp: false
   use:
-  - Game-nodes
-- name: Media-Node
+  - Gamenodes
+- name: MediaNode
   type: select
   use:
   - Nexitally
@@ -322,8 +322,8 @@ rules:
 ############################ rule-set 远程规则 ################################
 - RULE-SET,apple-proxy,PROXY
 - RULE-SET,apple-direct,DIRECT
-- RULE-SET,DisneyPlus,Media-Node
-- RULE-SET,Netflix,Media-Node
+- RULE-SET,DisneyPlus,MediaNode
+- RULE-SET,Netflix,MediaNode
 - RULE-SET,Steam,PROXY
 - RULE-SET,cn,DIRECT
 - RULE-SET,ad-keyword,REJECT
