@@ -138,6 +138,13 @@ dns:
       - +.googleapis.cn
       - +.googleapis.com
       - +.gvt1.com
+tun:
+  enable: true
+  stack: system
+  auto-detect-interface: true
+  auto-route: true
+  dns-hijack:
+    - 198.18.0.2:53
 ################ 使用转换器 https://sub.dler.io 转换为 node list ##############
 proxy-providers:
   DlerCloud:
