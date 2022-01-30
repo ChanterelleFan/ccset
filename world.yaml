@@ -283,12 +283,6 @@ rule-providers:
     url: "https://raw.dler.io/main/Clash/Provider/Domestic.yaml"
     path: ./ruleset/CN.yaml
     interval: 3600
-  ad-keyword:
-    type: http
-    behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/Basic/common-ad-keyword.yaml"
-    path: ./ruleset/common-ad-keyword.yaml
-    interval: 3600
   foreign:
     type: http
     behavior: classical
@@ -332,7 +326,6 @@ rules:
 - RULE-SET,Netflix,Media-Nodes
 - RULE-SET,Steam,PROXY
 - RULE-SET,cn,DIRECT
-- RULE-SET,ad-keyword,REJECT
 - RULE-SET,foreign,PROXY
 - RULE-SET,telegram,PROXY
 - RULE-SET,lan,DIRECT
