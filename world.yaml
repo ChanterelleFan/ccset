@@ -228,7 +228,6 @@ proxy-groups:
 - name: Media-Nodes
   type: select
   use:
-  - PROXY
   - Nexitally
   - DlerCloud
 - name: "Final"  # 没有匹配到任何规则时，该走向何处？
