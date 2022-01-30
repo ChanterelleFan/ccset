@@ -192,7 +192,7 @@ proxy-groups:
   - 🚑 DlerCloud
   - 🛴 Other-nodes
   - 🕹️ Game
-- name: "GlobalTV"
+- name: GlobalTV
   type: select
   proxies:
   - PROXY
@@ -200,7 +200,7 @@ proxy-groups:
   - 🛸 Nexitally
   - 🚑 DlerCloud
   - 🛴 Other-nodes
-- name: "AsianTV"
+- name: AsianTV
   type: select
   proxies:
   - DIRECT
@@ -208,24 +208,24 @@ proxy-groups:
   - 🛸 Nexitally
   - 🚑 DlerCloud
   - 🛴 Other-nodes
-- name: "🛸 Nexitally"
+- name: 🛸 Nexitally
   type: select
   use:
   - Nexitally
-- name: "🚑 DlerCloud"
+- name: 🚑 DlerCloud
   type: select
   use:
   - DlerCloud
-- name: "🛴 Other-nodes"
+- name: 🛴 Other-nodes
   type: select
   use:
   - Other-nodes
-- name: "🕹️ Game"
+- name: 🕹️ Game
   type: select
   disable-udp: false
   use:
   - Game
-- name: "Media-Nodes"
+- name: Media-Nodes
   type: select
   use:
   - PROXY
