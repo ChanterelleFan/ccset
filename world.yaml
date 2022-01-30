@@ -280,7 +280,7 @@ rule-providers:
   cn:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/Basic/CN.yaml"
+    url: "https://raw.dler.io/main/Clash/Provider/Domestic%20IPs.yaml"
     path: ./ruleset/CN.yaml
     interval: 3600
   ad-keyword:
@@ -298,13 +298,13 @@ rule-providers:
   telegram:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/App/social/Telegram.yaml"
+    url: "https://raw.dler.io/main/Clash/Provider/Telegram.yaml"
     path: ./ruleset/Telegram.yaml
     interval: 3600
   lan:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/Basic/LAN.yaml"
+    url: "https://raw.dler.io/main/Clash/Provider/LAN.yaml"
     path: ./ruleset/LAN.yaml
     interval: 3600
 ############### rule模式 [从上至下匹配规则，越靠前优先级越高] ################
