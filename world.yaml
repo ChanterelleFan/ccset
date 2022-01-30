@@ -262,13 +262,13 @@ rule-providers:
   DisneyPlus:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/App/stream/DisneyPlus.yaml"
+    url: "https://raw.dler.io/main/Clash/Provider/Media/Disney%20Plus.yaml"
     path: ./ruleset/DisneyPlus.yaml
     interval: 3600
   Netflix:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/Hackl0us/SS-Rule-Snippet@master/Rulesets/Clash/App/stream/Netflix.yaml"
+    url: "https://raw.dler.io/main/Clash/Provider/Media/Netflix.yaml"
     path: ./ruleset/Netflix.yaml
     interval: 3600	
   Steam:
