@@ -319,6 +319,9 @@ rules:
 - DOMAIN-SUFFIX,steam.clngaa.com,DIRECT #金山云
 - DOMAIN-SUFFIX,mileweb.cs.steampowered.com.8686c.com,DIRECT #网宿云
 - DOMAIN-SUFFIX,content.steamchina.com,DIRECT
+- DOMAIN-SUFFIX,bilivideo.com,DIRECT
+- DOMAIN-SUFFIX,biliapi.net,DIRECT
+- DOMAIN-SUFFIX,bilibili.com,DIRECT
 ############################ rule-set 远程规则 ################################
 - RULE-SET,apple-proxy,PROXY
 - RULE-SET,apple-direct,DIRECT
