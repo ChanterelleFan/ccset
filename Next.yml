@@ -1,5 +1,4 @@
-port: 8888
-socks-port: 8889
+---
 mixed-port: 8899
 allow-lan: true
 mode: Rule
@@ -149,7 +148,6 @@ proxy-providers:
     type: http
     path: ./nodes/Nexitally-nodes.list
     url: 
-    interval: 43200
 proxy-groups:
 - name: Proxy
   type: select
@@ -723,3 +721,4 @@ rule-providers:
     url: https://dler.cloud/Rules/Clash/Provider/LAN.yaml
     path: ./Rules/LAN
     interval: 86400
+...
