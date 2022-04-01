@@ -123,13 +123,13 @@ tun:
   dns-hijack:
     - 198.18.0.2:53
 proxy-providers:
-  DlerCloudnodes:
+  DlerCloud-nodes:
     type: http
-    path: ./nodes/DlerCloudnodes.list
+    path: ./nodes/DlerCloud-nodes.list
     url: 
-  Nexitallynodes:
+  Nexitally-nodes:
     type: http
-    path: ./nodes/Nexitallynodes.list
+    path: ./nodes/Nexitally-nodes.list
     url: 
 proxy-groups:
 - name: Proxy
@@ -140,12 +140,12 @@ proxy-groups:
   - Nexitally
 - name: DlerCloud
   type: select
-  proxies:
-  - DlerCloudnodes
+  use:
+  - DlerCloud-nodes
 - name: Nexitally
   type: select
-  proxies:
-  - Nexitallynodes
+  use:
+  - Nexitally-nodes
 - name: Domestic
   type: select
   proxies:
