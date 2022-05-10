@@ -137,7 +137,7 @@ proxy-groups:
   - name: DlerCloud
     type: select
     use:
-    - DlerCloud-nodes
+      - DlerCloud-nodes
   - name: Nexitally
     type: select
     use:
