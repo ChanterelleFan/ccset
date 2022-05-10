@@ -118,7 +118,7 @@ dns:
       - +.googleapis.cn
       - +.googleapis.com
       - +.gvt1.com
-proxies:
+proxy-providers:
   DlerCloud-nodes:
     type: http
     path: ./nodes/DlerCloud-nodes.list
