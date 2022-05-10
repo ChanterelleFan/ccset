@@ -119,86 +119,147 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-
+  DlerCloud-nodes:
+    type: http
+    path: ./nodes/DlerCloud-nodes.list
+    url: 
+  Nexitally-nodes:
+    type: http
+    path: ./nodes/Nexitally-nodes.list
+    url: 
 proxy-groups:
-  - name: Nexitally
+  - name: Proxy
     type: select
     proxies:
-
+      - DIRECT
+      - DlerCloud
+      - Nexitally
+  - name: DlerCloud
+    type: select
+    use:
+    - DlerCloud-nodes
+  - name: Nexitally
+    type: select
+    use:
+      - Nexitally-nodes
   - name: 🍎 Apple
     type: select
     proxies:
       - DIRECT
-
+      - Proxy
+      - DlerCloud
+      - Nexitally
   - name: 🎬 Emby
     type: select
     proxies:
+      - Proxy
+      - DIRECT
+      - DlerCloud
       - Nexitally
-  
   - name: 📲 Telegram
     type: select
     proxies:
+      - Proxy
+      - DIRECT
+      - DlerCloud
       - Nexitally
-
   - name: 🎬 YouTube
     type: select
     proxies:
+      - Proxy
+      - DIRECT
+      - DlerCloud
       - Nexitally
-    
   - name: 🎬 Bilibili
     type: select
     proxies:
       - DIRECT
+      - Proxy
+      - DlerCloud
       - Nexitally
-    
   - name: 🎬 myTVSUPER
     type: select
     proxies:
-
+      - Proxy
+      - DIRECT
+      - DlerCloud
+      - Nexitally
   - name: 📲 LineTV
     type: select
     proxies:
-  
+      - Proxy
+      - DIRECT
+      - DlerCloud
+      - Nexitally
   - name: 🎬 iQiyi
     type: select
     proxies:
-
+      - DIRECT
+      - Proxy
+      - DlerCloud
+      - Nexitally
   - name: 🎵 Tiktok
     type: select
     proxies:
- 
+      - DIRECT
+      - Proxy
+      - DlerCloud
+      - Nexitally
   - name: 📺 Disney
     type: select
     proxies:
- 
+      - Proxy
+      - DIRECT
+      - DlerCloud
+      - Nexitally
   - name: 📺 Netflix
     type: select
     proxies:
-  
+      - Proxy
+      - DIRECT
+      - DlerCloud
+      - Nexitally
   - name: 🌐 Google
     type: select
     proxies:
- 
+      - Proxy
+      - DIRECT
+      - DlerCloud
+      - Nexitally 
   - name: 🖥 Microsoft
     type: select
     proxies:
-  
+      - Proxy
+      - DIRECT
+      - DlerCloud
+      - Nexitally  
   - name: 🖥 Learning
     type: select
     proxies:
- 
+      - Proxy
+      - DIRECT
+      - DlerCloud
+      - Nexitally 
   - name: 📟 Twitter
     type: select
     proxies:
-      
+      - Proxy
+      - DIRECT
+      - DlerCloud
+      - Nexitally      
   - name: 📺 International-Media
     type: select
     proxies:
-      
+      - Proxy
+      - DIRECT
+      - DlerCloud
+      - Nexitally      
   - name: China-Media
     type: select
     proxies:
       - DIRECT
+      - Proxy
+      - DlerCloud
       - Nexitally
   - name: Hijacking
     type: select
@@ -209,12 +270,16 @@ proxy-groups:
     type: select
     proxies:
       - DIRECT
+      - Proxy
+      - DlerCloud
       - Nexitally
   - name: Final
     type: select
     proxies:
-      - Nexitally
+      - Proxy
       - DIRECT
+      - DlerCloud
+      - Nexitally
 rules:
   - DOMAIN-SUFFIX,emby.nexitally.com,🎬 Emby
   - DOMAIN-SUFFIX,ap.spotify.com,DIRECT
@@ -759,8 +824,6 @@ rules:
   - DOMAIN-SUFFIX,cas.org,🖥 Learning
   - DOMAIN-SUFFIX,cell.com,🖥 Learning
   - DOMAIN-SUFFIX,clarivate.com,🖥 Learning
-  - DOMAIN-SUFFIX,cnki.net,🖥 Learning
-  - DOMAIN-SUFFIX,cqvip.com,🖥 Learning
   - DOMAIN-SUFFIX,csiro.au,🖥 Learning
   - DOMAIN-SUFFIX,deepdyve.com,🖥 Learning
   - DOMAIN-SUFFIX,ebscohost.com,🖥 Learning
