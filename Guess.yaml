@@ -131,9 +131,9 @@ proxy-groups:
   - name: Proxy
     type: select
     proxies:
-      - DIRECT
       - DlerCloud
       - Nexitally
+      - DIRECT
   - name: DlerCloud
     type: select
     use:
